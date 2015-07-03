@@ -66,6 +66,7 @@ PileupJetIdAlgo::PileupJetIdAlgo(const edm::ParameterSet & ps)
 	    }
 	  }
 	}
+	//Test
 	setup();
 }
 
