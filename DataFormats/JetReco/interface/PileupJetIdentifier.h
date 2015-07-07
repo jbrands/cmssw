@@ -56,7 +56,10 @@ public:
 	
 	DECLARE_VARIABLE(ptD        ,float);
 
-	DECLARE_VARIABLE(nvtx   ,float);  
+	DECLARE_VARIABLE(nvtx   ,float);
+
+	DECLARE_VARIABLE(nTrueInt     ,float);
+        DECLARE_VARIABLE(dRMatch     ,float);
 };
 
 // ----------------------------------------------------------------------------------------------------
