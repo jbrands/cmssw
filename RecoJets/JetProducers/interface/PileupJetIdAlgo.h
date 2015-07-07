@@ -26,7 +26,8 @@
 // ----------------------------------------------------------------------------------------------------
 class PileupJetIdAlgo {
 public:
-	enum version_t { USER=-1, PHILv0=0 };
+        enum version_t { USER=-1, PHILv0=0 };
+	enum PUinput { hlt=-1, offline=0 };
 	
 	PileupJetIdAlgo(int version=PHILv0, const std::string & tmvaWeight="", const std::string & tmvaMethod="", 
 			Float_t impactParTkThreshod_=1., const std::vector<std::string> & tmvaVariables= std::vector<std::string>());
@@ -64,7 +65,8 @@ protected:
 	void runMva(); 
 	void bookReader();	
 	void resetVariables();
-	void initVariables();
+	void initVariables_offline();
+	void initVariables_hlt();
 
 	
 	PileupJetIdentifier internalId_;
@@ -79,6 +81,7 @@ protected:
 	Int_t   version_;
 	Float_t impactParTkThreshod_;
 	bool    cutBased_;
+	Int_t    PUinput_;
 	Float_t mvacut_     [3][4][4]; //Keep the array fixed
 	Float_t rmsCut_     [3][4][4]; //Keep the array fixed
 	Float_t betaStarCut_[3][4][4]; //Keep the array fixed
