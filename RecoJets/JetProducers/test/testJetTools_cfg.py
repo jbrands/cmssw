@@ -79,8 +79,10 @@ process.out.outputCommands += ['keep *_ak4PFJetsCHS_*_*',
 
 process.load('RecoJets.JetProducers.PileupJetID_cfi')
 
-process.pileupJetIdCalculator.jets = cms.InputTag("ak4PFJetsCHS")
-process.pileupJetIdEvaluator.jets = cms.InputTag("ak4PFJetsCHS")
+#process.pileupJetIdCalculator.jets = cms.InputTag("ak4PFJetsCHS")
+#process.pileupJetIdEvaluator.jets = cms.InputTag("ak4PFJetsCHS")
+process.pileupJetIdCalculator.jets = cms.InputTag("slimmedJetsAK8")
+process.pileupJetIdEvaluator.jets = cms.InputTag("slimmedJetsAK8")
 process.pileupJetIdCalculator.rho = cms.InputTag("fixedGridRhoFastjetAll")
 process.pileupJetIdEvaluator.rho = cms.InputTag("fixedGridRhoFastjetAll")
 
@@ -200,7 +202,7 @@ process.out.outputCommands += ['keep *_cmsTopTagPFJetsCHSMassAK8_*_*']
 from PhysicsTools.PatAlgos.patInputFiles_cff import filesRelValProdTTbarAODSIM
 process.source.fileNames = filesRelValProdTTbarAODSIM
 #                                         ##
-process.maxEvents.input = 5
+process.maxEvents.input = 50
 #                                         ##
 #   process.out.outputCommands = [ ... ]  ##  (e.g. taken from PhysicsTools/PatAlgos/python/patEventContent_cff.py)
 #                                         ##

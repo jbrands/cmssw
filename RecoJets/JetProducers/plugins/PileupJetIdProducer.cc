@@ -108,7 +108,7 @@ PileupJetIdProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 		// require basic quality cuts on the vertexes
 		vtx = vertexes.begin();
 		while( vtx != vertexes.end() && ( vtx->isFake() || vtx->ndof() < 4 ) ) {
-			++vtx;
+		  ++vtx;
 		}
 		if( vtx == vertexes.end() ) { vtx = vertexes.begin(); }
 	}
