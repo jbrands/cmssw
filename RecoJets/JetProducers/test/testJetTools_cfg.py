@@ -25,6 +25,15 @@ addJetCollection(
 
 addJetCollection(
     process,
+    labelName = 'AK4PF',
+    jetSource = cms.InputTag('ak4PFJets'),
+    algo = 'ak4',
+    rParam = 0.4,
+    jetCorrections = ('AK5PF', cms.vstring(['L1FastJet', 'L2Relative', 'L3Absolute']), 'None')
+    )
+
+addJetCollection(
+    process,
     labelName = 'CA8PFCHS',
     jetSource = cms.InputTag('ca8PFJetsCHS'),
     algo = 'ca8',
@@ -63,7 +72,9 @@ patJetsCA8 = process.patJetsCA8PFCHS
 patJetsAK8 = process.patJetsAK8PFCHS
 
 process.out.outputCommands += ['keep *_ak4PFJetsCHS_*_*',
+                               'keep *_ak4PFJets_*_*',
                                'keep *_patJetsAK4PFCHS_*_*',
+                               'keep *_patJetsAK4PF_*_*',
                                'keep *_ca8PFJetsCHS_*_*',
                                'keep *_patJetsCA8PFCHS_*_*',
                                'keep *_ak8PFJetsCHS_*_*',
@@ -86,14 +97,16 @@ process.pileupJetIdEvaluator.rho = cms.InputTag("fixedGridRhoFastjetAll")
 
 patJetsAK4.userData.userFloats.src += ['pileupJetIdEvaluator:fullDiscriminant']
 patJetsAK4.userData.userInts.src += ['pileupJetIdEvaluator:cutbasedId','pileupJetIdEvaluator:fullId']
-process.out.outputCommands += ['keep *_pileupJetIdEvaluator_*_*']
+process.out.outputCommands += ['keep *_pileupJetIdEvaluator_*_*',
+'keep *_pileupJetIdCalculator_*_*',
+]
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #QGTagger
 
-process.load('RecoJets.JetProducers.QGTagger_cfi')
-patJetsAK4.userData.userFloats.src += ['QGTagger:qgLikelihood']
-process.out.outputCommands += ['keep *_QGTagger_*_*']
+#process.load('RecoJets.JetProducers.QGTagger_cfi')
+#patJetsAK4.userData.userFloats.src += ['QGTagger:qgLikelihood']
+#process.out.outputCommands += ['keep *_QGTagger_*_*']
 
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Njettiness
@@ -197,13 +210,18 @@ process.out.outputCommands += ['keep *_cmsTopTagPFJetsCHSMassAK8_*_*']
 #from Configuration.AlCa.GlobalTag import GlobalTag
 #process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:run2_mc')
 #                                         ##
-from PhysicsTools.PatAlgos.patInputFiles_cff import filesRelValProdTTbarAODSIM
+
+filesRelValProdTTbarAODSIM = cms.untracked.vstring(
+
+    'file:/data/jbrandstetter/JetId/RelValTTbar_PU1_76X.root'
+)
+#from PhysicsTools.PatAlgos.patInputFiles_cff import filesRelValProdTTbarAODSIM
 process.source.fileNames = filesRelValProdTTbarAODSIM
 #                                         ##
-process.maxEvents.input = 5
+process.maxEvents.input = -1
 #                                         ##
 #   process.out.outputCommands = [ ... ]  ##  (e.g. taken from PhysicsTools/PatAlgos/python/patEventContent_cff.py)
 #                                         ##
-process.out.fileName = 'testJetTools.root'
+process.out.fileName = 'testJetTools_0220.root'
 #                                         ##
 #   process.options.wantSummary = False   ##  (to suppress the long output at the end of the job)
