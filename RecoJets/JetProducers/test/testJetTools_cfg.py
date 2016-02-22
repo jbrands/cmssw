@@ -218,10 +218,10 @@ filesRelValProdTTbarAODSIM = cms.untracked.vstring(
 #from PhysicsTools.PatAlgos.patInputFiles_cff import filesRelValProdTTbarAODSIM
 process.source.fileNames = filesRelValProdTTbarAODSIM
 #                                         ##
-process.maxEvents.input = -1
+process.maxEvents.input = 5
 #                                         ##
 #   process.out.outputCommands = [ ... ]  ##  (e.g. taken from PhysicsTools/PatAlgos/python/patEventContent_cff.py)
 #                                         ##
-process.out.fileName = 'testJetTools_0220.root'
+process.out.fileName = 'testJetTools_0222_test.root'
 #                                         ##
 #   process.options.wantSummary = False   ##  (to suppress the long output at the end of the job)
